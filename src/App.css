@@ -11,6 +11,10 @@ h1 {
   height: 15vh;
 }
 
+textarea {
+  text-align: center;
+}
+
 .tasks {
   margin: 0;
   margin-top: 80px;
@@ -19,6 +23,13 @@ h1 {
 }
 
 .task {
+  
   height: 15vh;
   margin-bottom: 20px;
+}
+
+.task-update {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
