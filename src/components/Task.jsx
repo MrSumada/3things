@@ -9,7 +9,7 @@ const Task = ({index}) => {
     
 
 
-    const Update = () => {
+    const handleUpdate = () => {
         if(!Updated){
             setUpdated(true);
         }
@@ -17,6 +17,11 @@ const Task = ({index}) => {
             setUpdated(false);
         }
     }
+
+    const handleNotes = () => {
+        console.log("add notes modal");
+    }
+
     const handleComplete = () => {
         if(!Complete) setComplete(true);
         else setComplete(false);
@@ -40,17 +45,24 @@ const Task = ({index}) => {
 
 
     return (
-      <div className="task">
+      <div className="task-container">
         {!Updated ?
-            <div>
-                <button style={{backgroundColor: Complete ? "teal"  : "", color: Complete? "white" : "black"}} onClick={Update}>{Text}</button>
-                <button  onClick={handleComplete}>{!Complete ? "Done" : "Undo"}</button>
+            <div className="task">
+                <button className={`task-button ${ Complete ? "complete" : "incomplete"}`}>{Text}</button>
+                <div className="task-actions">
+                    {!Complete ? (<button  onClick={handleUpdate}>Edit</button>) : ""}
+                    {!Complete ? (<button  onClick={handleNotes}>Notes</button>) : ""}
+                    <button  onClick={handleComplete}>{!Complete ? "Done" : "Undo"}</button>
+                </div>
             </div>
             :
-            <div className="task-update">
-                <textarea onChange={writeTask}>{Text}</textarea> 
-                <button  onClick={Update}>Set</button>
-                
+            <div className="task task-update">
+                <textarea className="task-textarea" onChange={writeTask}>{Text}</textarea> 
+                <div className="task-actions">
+                    {!Complete ? (<button  onClick={handleUpdate}>Set</button>) : ""}
+                    {!Complete ? (<button  onClick={handleNotes}>Notes</button>) : ""}
+                    {/* <button  onClick={handleComplete}>{!Complete ? "Done" : "Undo"}</button> */}
+                </div>
             </div>
         }
         {/* {Updated ? <h3>#{index} Clicked</h3> : null } */}

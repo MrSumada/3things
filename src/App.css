@@ -1,35 +1,143 @@
 #root {
-  max-width: 1280px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   margin: 0 auto;
   padding: 0rem;
   text-align: center;
+  --main-color: rgb(0, 128, 128);
+  --fill-color: rgba(255, 255, 255, 0.87);
+  --shadow-color: rgba(0, 128, 128, .2);
+  --text-color: black;
+  --text-select-color: rgba(255, 255, 255, 0.87);
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+a:hover {
+  border: solid 1px var(--shadow-color);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  /* place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 h1 {
+  font-size: 3.0em;
+  /* line-height: 1.1; */
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid var(--main-color);
+  /* box-shadow: 2px 1px 0px 2px var(--shadow-color); */
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--shadow-color);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+button:hover {
+  background-color: var(--fill-color);
+  transition: background-color 0.5s;
+}
+button:focus,
+button:focus-visible {
+  /* outline: 4px auto var(--fill-color); */
+}
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+
+
+h1 {
+  color: var(--main-color);
   margin: 0;
   padding-top: 5vh;
   height: 15vh;
 }
 
-textarea {
+.task-textarea {
   text-align: center;
+  z-index: 1;
+  border-radius: 15px;
+  height: 75px;
+  width: 200px;
+  box-shadow: 5px 2px 0px 2px var(--shadow-color);
+  
 }
 
 .tasks {
-  margin: 0;
-  margin-top: 80px;
+  margin: auto;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
+}
+
+.task-container {
+  margin: auto;
+  margin-top: 10px;
+  height: max(25vh, 150px);
+  min-height: 150px;
+  margin-bottom: 5px;
 }
 
 .task {
-  
-  height: 15vh;
-  margin-bottom: 20px;
-}
-
-.task-update {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 25vw;
+}
+
+/* Task button styling */
+.complete {
+  background: linear-gradient(to left, var(--main-color) 50%, var(--fill-color) 50%) right;
+  box-shadow: -5px 2px 0px 2px var(--shadow-color);
+  color: var(--text-select-color);
+}
+
+.incomplete {
+  background: linear-gradient(to left, var(--main-color) 50%, var(--fill-color) 50%) left;
+  box-shadow: 5px 2px 0px 2px var(--shadow-color);
+  color: var(--text-color);
+}
+
+.task-button {
+  height: 75px;
+  width: 200px;
+  background-size: 220% 100%;
+  transition:all 1s ease;
+  border: solid 1px teal;
+  cursor: default;
+}
+
+.task-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
