@@ -41,37 +41,18 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid var(--main-color);
-  /* box-shadow: 2px 1px 0px 2px var(--shadow-color); */
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   background-color: var(--shadow-color);
   cursor: pointer;
-  transition: all 0.25s;
+  transition: background-color 0.25s;
 }
 button:hover {
   background-color: var(--fill-color);
-  transition: background-color 0.5s;
+  /* transition: background-color 0.5s; */
 }
-button:focus,
-button:focus-visible {
-  /* outline: 4px auto var(--fill-color); */
-}
-
-/* @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
-
 
 h1 {
   color: var(--main-color);
@@ -87,7 +68,6 @@ h1 {
   height: 75px;
   width: 200px;
   box-shadow: 5px 2px 0px 2px var(--shadow-color);
-  
 }
 
 .tasks {
@@ -131,13 +111,40 @@ h1 {
   height: 75px;
   width: 200px;
   background-size: 220% 100%;
-  transition:all 1s ease;
   border: solid 1px teal;
   cursor: default;
+  transition: all 1.5s ease;
 }
 
 .task-actions {
   display: flex;
   flex-direction: row;
   gap: 10px;
+}
+
+.fade-in {
+  animation-name: in;
+  animation-duration: .5s;
+}
+
+.fade-out {
+  animation-name: out;
+  animation-duration: .5s;
+}
+
+.abs-position {
+  opacity: 0;
+  display: block;
+  position: absolute;
+  top:0; 
+}
+
+@keyframes in {
+  from {opacity: 0;}
+  to {opacity: 1;};
+}
+
+@keyframes out {
+  from {opacity: 1;}
+  to {opacity: 0;};
 }
