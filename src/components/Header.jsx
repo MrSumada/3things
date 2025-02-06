@@ -20,7 +20,7 @@ const Header = ({TasksRemaining}) => {
                 setFadeOut(false);
             }, 500); 
         }
-      }, [TasksRemaining]);
+    }, [TasksRemaining]);
     
     return (
         <>
