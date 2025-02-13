@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Note from "./Note";
 
-const Task = ({index, TasksRemaining, setTasksRemaining}) => {
+const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, Tasks, setTasks}) => {
 
-    const [EditText, setEditText] = useState(`Set Task #${index}`);
+    const [EditText, setEditText] = useState(text);
     const [EditUpdated, setEditUpdated] = useState(false);
     const [Done, setDone] = useState(false);
     const [NotesOpened, setNotesOpened] = useState(false);
 
-    const handleEdit = () => {
+    const handleEditOpen = () => {
         //Open Textarea to edit tasks
         if(!EditUpdated)setEditUpdated(true);
-        else setEditUpdated(false);
+        else {
+            if(EditText == "") setEditText(`Set Task #${index+1}`);
+            setEditUpdated(false);
+            const newTasks = Tasks.map((task, i) => 
+                i === index ? { ...task, text: EditText } : task
+            )
+            setTasks(newTasks);
+            localStorage.setItem('allTasks', JSON.stringify(newTasks));
+            console.log(newTasks)
+        }
     }
 
-    const handleNotes = () => {
+    const handleNotesOpen = () => {
         // TO DO: trigger notes Modal
         // Update state adn add info to local storage
         if(!NotesOpened) {
@@ -31,36 +40,23 @@ const Task = ({index, TasksRemaining, setTasksRemaining}) => {
             
             setDone(true);
             setTasksRemaining(parseInt(Num)-1);
-            localStorage.setItem(`task-done-${index}`, Done);
+            // localStorage.setItem(`task-done-${index}`, Done);
         }
         else {
             setDone(false);
             setTasksRemaining(parseInt(Num)+1);
-            localStorage.removeItem(`task-done-${index}`);
+            // localStorage.removeItem(`task-done-${index}`);
         }
     }
 
     const writeTask = (e) => {
-        // Write and store task in local storage, unless empty string.
-        // Todo update for longer task input, multi-line inputs, sanitize code, etc.
-
-        let Task = e.target.value;
-        if (!Task) {
-            Task = `Set Task #${index}`;
-            localStorage.removeItem(`task-${index}`);
-        } else {
-            localStorage.setItem(`task-${index}`, Task);
-        }
-        setEditText(Task);
+        let newTask = e.target.value.trim();
+        setEditText(newTask);
     }
 
     useEffect(()=>{
-    // Retain task info from Local Storage
-        let savedTask =localStorage.getItem(`task-${index}`);
-        if(savedTask) { 
-            setEditText(savedTask); 
-        }
-    },[]);
+        setEditText(text);
+    },[text]);
 
     return (
       <div className="task-container">
@@ -68,8 +64,8 @@ const Task = ({index, TasksRemaining, setTasksRemaining}) => {
             <div className="task">
                 <button className={`task-button ${ Done ? "complete" : "incomplete"}`}>{EditText}</button>
                 <div className="task-actions">
-                    {!Done ? (<button  onClick={handleEdit}>Edit</button>) : ""}
-                    {!Done ? (<button  onClick={handleNotes}>Notes</button>) : ""}
+                    {!Done ? (<button  onClick={handleEditOpen}>Edit</button>) : ""}
+                    {!Done ? (<button  onClick={handleNotesOpen}>Notes</button>) : ""}
                     <button  onClick={handleDone}>{!Done ? "Done" : "Undo"}</button>
                 </div>
             </div>
@@ -77,8 +73,8 @@ const Task = ({index, TasksRemaining, setTasksRemaining}) => {
             <div className="task task-update">
                 <textarea className="task-textarea" onChange={writeTask} value={EditText}></textarea> 
                 <div className="task-actions">
-                    {!Done ? (<button  onClick={handleEdit}>Set</button>) : ""}
-                    {!Done ? (<button  onClick={handleNotes}>Notes</button>) : ""}
+                    {!Done ? (<button  onClick={handleEditOpen}>Set</button>) : ""}
+                    {!Done ? (<button  onClick={handleNotesOpen}>Notes</button>) : ""}
                     {/* <button  onClick={handleDone}>{!Done ? "Done" : "Undo"}</button> */}
                 </div>
             </div>

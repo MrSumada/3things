@@ -1,6 +1,6 @@
 #root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color-scheme: light dark;
+  /* color-scheme: light dark; */
   color: rgba(255, 255, 255, 0.87);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -58,7 +58,24 @@ h1 {
   color: var(--main-color);
   margin: 0;
   padding-top: 5vh;
-  height: 15vh;
+  height: 10vh;
+}
+
+.reset-button {
+  position: absolute;
+  top: 5vh;
+  right: 5vw;
+  opacity: .2;
+  background-color: var(--fill-color);
+}
+
+.new-date {
+  opacity: .5;
+}
+
+.reset-button:hover {
+  opacity: 1;
+  background-color: var(--fill-color);
 }
 
 .task-textarea {
