@@ -18,41 +18,37 @@ function App() {
   );
 
   const checkDate = () => {
-    // init new date and old date from storage
-    let date = new Date().getDate();
+    let date = new Date().toDateString(); // Use toDateString to compare only the date part
+    console.log("Current date: ", date);
     let savedDate = localStorage.getItem('date');
-    // if old date exists, compare them
-    // if new day, set NewDate to true
-    if(savedDate) {
-      if(savedDate == date) {
-        setNewDate(false);
-      } else {
-        localStorage.setItem('date', date);
-        setNewDate(true);
-      }
+    console.log("Saved date: ", savedDate);
+
+    if (savedDate) {
+        if (savedDate == date) {
+            setNewDate(false);
+        } else {
+            localStorage.setItem('date', date);
+            setNewDate(true);
+        }
     } else {
-      localStorage.setItem('date', date);
-      setNewDate(false);
+        localStorage.setItem('date', date);
+        setNewDate(false);
     }
-  }
+  };
 
   // Check if new Date
   useEffect(() => {
     checkDate();
-    setInterval( checkDate(), 60000);
-  }, [])
+    const interval = setInterval(checkDate, 60000);
+    return () => clearInterval(interval); // 
+  }, []);
+
 
   return (
     <>
       <Header 
         TasksRemaining={TasksRemaining} 
-      />
-      <Reset 
-        NewDate={NewDate}
-        setNewDate={setNewDate}
-        setTasks={setTasks}
-      />
-      
+      />      
         <div className="tasks">
           {Tasks.length > 0 &&
           [0, 1, 2].map((i) => (
@@ -69,6 +65,12 @@ function App() {
             />
           ))}
         </div> 
+
+        <Reset 
+        NewDate={NewDate}
+        setNewDate={setNewDate}
+        setTasks={setTasks}
+      />
       
     </>
     

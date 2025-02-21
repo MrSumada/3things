@@ -10,7 +10,6 @@ const Reset = ({ NewDate, setNewDate, setTasks }) => {
             { text: "Set Task #3", complete: false, Notes: "" }
           ];
 
-        console.log("reset!")
         setTasks(defaultArray);
         localStorage.removeItem("allTasks");
     }
@@ -21,7 +20,7 @@ const Reset = ({ NewDate, setNewDate, setTasks }) => {
                 className={`reset-button ${ NewDate ? "new-date" : ""}`}
                 onClick={handleReset}
             >
-                { NewDate ? (<>New Day!... Reset?</>) : (<>Reset?</>)}
+                { NewDate ? (<>Reset ???</>) : (<>Reset?</>)}
             </button>
         </>
     )

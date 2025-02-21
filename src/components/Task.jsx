@@ -15,7 +15,7 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
             if(EditText == "") setEditText(`Set Task #${index+1}`);
             setEditUpdated(false);
             const newTasks = Tasks.map((task, i) => 
-                i === index ? { ...task, text: EditText } : task
+                i === index ? { ...task, text: EditText.trim() } : task
             )
             setTasks(newTasks);
             localStorage.setItem('allTasks', JSON.stringify(newTasks));
@@ -50,7 +50,7 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
     }
 
     const writeTask = (e) => {
-        let newTask = e.target.value.trim();
+        let newTask = e.target.value;
         setEditText(newTask);
     }
 
@@ -62,7 +62,7 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
       <div className="task-container">
         {!EditUpdated ?
             <div className="task">
-                <button className={`task-button ${ Done ? "complete" : "incomplete"}`}>{EditText}</button>
+                <button onClick={handleEditOpen} className={`task-button ${ Done ? "complete" : "incomplete"}`}>{EditText}</button>
                 <div className="task-actions">
                     {!Done ? (<button  onClick={handleEditOpen}>Edit</button>) : ""}
                     {!Done ? (<button  onClick={handleNotesOpen}>Notes</button>) : ""}
