@@ -5,7 +5,7 @@ import Task from "./components/Task";
 import Reset from "./components/Reset";
 
 function App() {
-  const [TasksRemaining, setTasksRemaining] = useState(3);
+  const [TasksRemaining, setTasksRemaining] = useState(localStorage.getItem("tasks-remaining") || 3);
   const [NewDate, setNewDate] = useState(false);
   const [Tasks, setTasks] = useState(JSON.parse(localStorage.getItem("allTasks"))
     || 

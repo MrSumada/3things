@@ -5,8 +5,17 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
 
     const [EditText, setEditText] = useState(text);
     const [EditUpdated, setEditUpdated] = useState(false);
-    const [Done, setDone] = useState(false);
+    const [Done, setDone] = useState(complete);
     const [NotesOpened, setNotesOpened] = useState(false);
+
+    const saveTasks = (key, data) => {
+        const newTasks = Tasks.map((task, i) => 
+            i === index ? { ...task, [key]: data } : task
+        )
+        console.log(newTasks)
+        setTasks(newTasks);
+        localStorage.setItem('allTasks', JSON.stringify(newTasks));
+    }
 
     const handleEditOpen = () => {
         //Open Textarea to edit tasks
@@ -14,12 +23,7 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
         else {
             if(EditText == "") setEditText(`Set Task #${index+1}`);
             setEditUpdated(false);
-            const newTasks = Tasks.map((task, i) => 
-                i === index ? { ...task, text: EditText.trim() } : task
-            )
-            setTasks(newTasks);
-            localStorage.setItem('allTasks', JSON.stringify(newTasks));
-            console.log(newTasks)
+            saveTasks("text", EditText.trim())
         }
     }
 
@@ -37,16 +41,18 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
         // Update state and add info to local storage
         let Num = TasksRemaining;
         if(!Done) {
-            
             setDone(true);
             setTasksRemaining(parseInt(Num)-1);
-            // localStorage.setItem(`task-done-${index}`, Done);
+            localStorage.setItem("tasks-remaining", parseInt(TasksRemaining)-1);
+            console.log("Tasks remaining: ", TasksRemaining);
         }
         else {
             setDone(false);
             setTasksRemaining(parseInt(Num)+1);
-            // localStorage.removeItem(`task-done-${index}`);
+            localStorage.setItem("tasks-remaining", parseInt(TasksRemaining) + 1);
+            console.log("Tasks remaining: ", TasksRemaining);
         }
+        saveTasks("complete", !Done);
     }
 
     const writeTask = (e) => {
