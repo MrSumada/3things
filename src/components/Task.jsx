@@ -72,6 +72,10 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
         setEditText(text);
     },[text]);
 
+    useEffect(()=>{
+        setDone(complete);
+    },[complete]);
+
     return (
       <div className="task-container">
         {!EditUpdated ?

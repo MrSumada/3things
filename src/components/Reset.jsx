@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Reset = ({ NewDate, setNewDate, setTasks }) => {
+const Reset = ({ NewDate, setNewDate, setTasks, setTasksRemaining }) => {
 
     const handleReset = () => {
 
@@ -11,6 +11,7 @@ const Reset = ({ NewDate, setNewDate, setTasks }) => {
           ];
 
         setTasks(defaultArray);
+        setTasksRemaining(3);
         localStorage.removeItem("allTasks");
     }
 

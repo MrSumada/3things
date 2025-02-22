@@ -70,6 +70,7 @@ function App() {
         NewDate={NewDate}
         setNewDate={setNewDate}
         setTasks={setTasks}
+        setTasksRemaining={setTasksRemaining}
       />
       
     </>
