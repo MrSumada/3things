@@ -18,6 +18,7 @@ const Reset = ({ NewDate, setNewDate, setTasks }) => {
         <>
             <button 
                 className={`reset-button ${ NewDate ? "new-date" : ""}`}
+                title={ NewDate ? "Reset for the new day?" : "Reset?" }
                 onClick={handleReset}
             >
                 { NewDate ? (<>Reset ???</>) : (<>Reset?</>)}

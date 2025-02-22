@@ -17,13 +17,21 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
         localStorage.setItem('allTasks', JSON.stringify(newTasks));
     }
 
-    const handleEditOpen = () => {
+    const handleEditOpen = (e) => {
         //Open Textarea to edit tasks
-        if(!EditUpdated)setEditUpdated(true);
-        else {
-            if(EditText == "") setEditText(`Set Task #${index+1}`);
+        if(!EditUpdated){
+            if(EditText == `Set Task #${index+1}`) setEditText("");
+            setEditUpdated(true);
+            setTimeout(() => document.getElementById(`textfield-${index}`).focus());
+        } else {
             setEditUpdated(false);
-            saveTasks("text", EditText.trim())
+            if(EditText.trim() == "") { 
+                setEditText(`Set Task #${index+1}`); 
+                saveTasks("text", `Set Task #${index+1}`);
+            }else {
+                saveTasks("text", EditText.trim());
+            }
+            
         }
     }
 
@@ -68,7 +76,7 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
       <div className="task-container">
         {!EditUpdated ?
             <div className="task">
-                <button onClick={handleEditOpen} className={`task-button ${ Done ? "complete" : "incomplete"}`}>{EditText}</button>
+                <button id={`task-${index}`} onClick={handleEditOpen} className={`task-button ${ Done ? "complete" : "incomplete"}`}>{EditText}</button>
                 <div className="task-actions">
                     {!Done ? (<button  onClick={handleEditOpen}>Edit</button>) : ""}
                     {!Done ? (<button  onClick={handleNotesOpen}>Notes</button>) : ""}
@@ -77,7 +85,7 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
             </div>
             :
             <div className="task task-update">
-                <textarea className="task-textarea" onChange={writeTask} value={EditText}></textarea> 
+                <textarea id={`textfield-${index}`} className="task-textarea" onChange={writeTask} value={EditText}></textarea> 
                 <div className="task-actions">
                     {!Done ? (<button  onClick={handleEditOpen}>Set</button>) : ""}
                     {!Done ? (<button  onClick={handleNotesOpen}>Notes</button>) : ""}

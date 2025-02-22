@@ -94,9 +94,14 @@ h1 {
   text-align: center;
   z-index: 1;
   border-radius: 15px;
-  height: 75px;
+  height: 65px;
   width: 200px;
+  padding: 5px 2.5px 5px 2.5px;
   box-shadow: 5px 2px 0px 2px var(--shadow-color);
+}
+
+.task-textarea:focus-visible {
+  outline: var(--main-color) auto 1px;
 }
 
 .tasks {
@@ -142,6 +147,7 @@ h1 {
   border: solid 1px teal;
   cursor: default;
   transition: all 1.5s ease;
+  overflow: scroll;
 }
 
 .task-actions {
