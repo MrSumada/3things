@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Task from "./components/Task";
 import Reset from "./components/Reset";
+import Favicon from "./components/Favicon";
 
 function App() {
   const [TasksRemaining, setTasksRemaining] = useState(localStorage.getItem("tasks-remaining") || 3);
@@ -17,8 +18,13 @@ function App() {
     ]
   );
 
+  const updateFavicon = () => {
+      const link = document.querySelector("link[rel*='icon']")
+      if(TasksRemaining === 2) console.log("no bug")
+  }
+
   const checkDate = () => {
-    let date = new Date().toDateString(); // Use toDateString to compare only the date part
+    let date = new Date().toDateString();
     console.log("Current date: ", date);
     let savedDate = localStorage.getItem('date');
     console.log("Saved date: ", savedDate);
@@ -46,6 +52,9 @@ function App() {
 
   return (
     <>
+      <Favicon 
+        TasksRemaining={TasksRemaining}
+      />
       <Header 
         TasksRemaining={TasksRemaining} 
       />      
