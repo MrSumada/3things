@@ -80,19 +80,22 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
       <div className="task-container">
         {!EditUpdated ?
             <div className="task">
-                <button id={`task-${index}`} onClick={handleEditOpen} className={`task-button ${ Done ? "complete" : "incomplete"}`}>{EditText}</button>
+                <button id={`task-${index}`} 
+                    onClick={ !Done ? handleEditOpen : undefined} 
+                    className={`task-button ${ Done ? "complete" : "incomplete"}`
+                }>{EditText}</button>
                 <div className="task-actions">
-                    {!Done ? (<button  onClick={handleEditOpen}>Edit</button>) : ""}
-                    {!Done ? (<button  onClick={handleNotesOpen}>Notes</button>) : ""}
-                    <button  onClick={handleDone}>{!Done ? "Done" : "Undo"}</button>
+                    {!Done ? (<button  className="btn-edit" onClick={handleEditOpen}>Edit</button>) : ""}
+                    {!Done ? (<button  className="btn-notes" onClick={handleNotesOpen}>Notes</button>) : ""}
+                    <button  className="btn-done" onClick={handleDone}>{!Done ? "Done" : "Undo"}</button>
                 </div>
             </div>
             :
             <div className="task task-update">
                 <textarea id={`textfield-${index}`} className="task-textarea" onChange={writeTask} value={EditText}></textarea> 
                 <div className="task-actions">
-                    {!Done ? (<button  onClick={handleEditOpen}>Set</button>) : ""}
-                    {!Done ? (<button  onClick={handleNotesOpen}>Notes</button>) : ""}
+                    {!Done ? (<button className="btn-set" onClick={handleEditOpen}>Set</button>) : ""}
+                    {!Done ? (<button className="btn-notes" onClick={handleNotesOpen}>Notes</button>) : ""}
                     {/* <button  onClick={handleDone}>{!Done ? "Done" : "Undo"}</button> */}
                 </div>
             </div>
