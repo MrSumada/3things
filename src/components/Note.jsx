@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-const Note = ({notes, Task, setNotesOpened, saveTasks}) => {
+const Note = ({index, notes, Task, NotesOpened, setNotesOpened, saveTasks}) => {
 
     const [NewNote, setNewNote] = useState(notes);
+    const notesTextRef = useRef(null);
 
     const writeNote = (e) => {
         let note = e.target.value;
@@ -14,12 +15,30 @@ const Note = ({notes, Task, setNotesOpened, saveTasks}) => {
         setNotesOpened(false);
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            if(notesTextRef.current) {
+                notesTextRef.current.focus();
+                notesTextRef.current.select();
+            }
+        })
+    },[NotesOpened])
+
     return (
         <>
             <div className="notes-modal">
                 <h2>Note for {Task}</h2>
-                <textarea className="note-textarea" value={NewNote} onChange={writeNote}></textarea>
-                <button className="btn-notes" onClick={handleNotesOpen}>Close</button>
+                <textarea  
+                    id={`note-textarea-${index}`}
+                    className="note-textarea" 
+                    ref={notesTextRef}
+                    value={NewNote} 
+                    onChange={writeNote}
+                ></textarea>
+                <button 
+                    className="btn-notes"
+                    onClick={handleNotesOpen}
+                >Close</button>
             </div>
         </>
     )

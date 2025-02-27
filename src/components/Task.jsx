@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Note from "./Note";
 
 const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, Tasks, setTasks}) => {
@@ -7,6 +7,7 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
     const [EditOpened, setEditOpened] = useState(false);
     const [Done, setDone] = useState(complete);
     const [NotesOpened, setNotesOpened] = useState(false);
+    const textAreaRef = useRef(null);
 
     const saveTasks = (key, data) => {
         const newTasks = Tasks.map((task, i) => 
@@ -21,7 +22,12 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
         if(!EditOpened){
             if(Task == `Set Task #${index+1}`) setTask("");
             setEditOpened(true);
-            setTimeout(() => document.getElementById(`textfield-${index}`).focus());
+            setTimeout(() => {
+                if (textAreaRef.current) {
+                    textAreaRef.current.focus();
+                    textAreaRef.current.select();
+                }
+            });
         } else {
             setEditOpened(false);
             if(Task.trim() == "") { 
@@ -35,8 +41,6 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
     }
 
     const handleNotesOpen = () => {
-        // TO DO: trigger notes Modal
-        // Update state adn add info to local storage
         if(NotesOpened) {
             setNotesOpened(false);
         } else {
@@ -45,7 +49,6 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
     }
 
     const handleDone = () => {
-        // Update state and add info to local storage
         let Num = TasksRemaining;
         if(!Done) {
             setDone(true);
@@ -77,8 +80,10 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
       <div className="task-container">
         {NotesOpened ? 
             <Note 
+                index={index}
                 notes={notes}
                 Task={Task}
+                NotesOpened={NotesOpened}
                 setNotesOpened={setNotesOpened}
                 saveTasks={saveTasks}
             /> 
@@ -90,17 +95,37 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
                     className={`task-button ${ Done ? "complete" : "incomplete"}`
                 }>{Task}</button>
                 <div className="task-actions">
-                    {!Done ? (<button  className="btn-edit" onClick={handleEditOpen}>Edit</button>) : ""}
-                    {!Done ? (<button  className="btn-notes" onClick={handleNotesOpen}>Notes</button>) : ""}
-                    <button  className="btn-done" onClick={handleDone}>{!Done ? "Done" : "Undo"}</button>
+                    {!Done ? (<button  
+                        className="btn-edit" 
+                        onClick={handleEditOpen}
+                    >Edit</button>) : ""}
+                    {!Done ? (<button  
+                        className="btn-notes" 
+                        onClick={handleNotesOpen}
+                    >Notes</button>) : ""}
+                    <button  
+                        className="btn-done" 
+                        onClick={handleDone}
+                    >{!Done ? "Done" : "Undo"}</button>
                 </div>
             </div>
             :
             <div className="task task-update">
-                <textarea id={`textfield-${index}`} className="task-textarea" onChange={writeTask} value={Task}></textarea> 
+                <textarea id={`textfield-${index}`} 
+                    className="task-textarea" 
+                    ref={textAreaRef}
+                    onChange={writeTask} 
+                    value={Task}
+                ></textarea> 
                 <div className="task-actions">
-                    {!Done ? (<button className="btn-set" onClick={handleEditOpen}>Set</button>) : ""}
-                    {!Done ? (<button className="btn-notes" onClick={handleNotesOpen}>Notes</button>) : ""}
+                    {!Done ? (<button 
+                        className="btn-set" 
+                        onClick={handleEditOpen}
+                    >Set</button>) : ""}
+                    {!Done ? (<button 
+                        className="btn-notes" 
+                        onClick={handleNotesOpen}
+                    >Notes</button>) : ""}
                 </div>
             </div>
         }

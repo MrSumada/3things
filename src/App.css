@@ -63,12 +63,16 @@ textarea {
   text-align: center;
   z-index: 1;
   border-radius: 15px;
-  height: 65px;
   width: 200px;
+  height: 65px;
+  font-size: max(16px, 1em);
   padding: 5px 2.5px 5px 2.5px;
   box-shadow: 5px 2px 0px 2px var(--shadow-color);
 }
 
+textarea:focus-visible {
+  outline: var(--main-color) auto 1px;
+}
 
 /* Reset Button */
 
@@ -127,9 +131,6 @@ textarea {
   width: 25vw;
 }
 
-.task-textarea:focus-visible {
-  outline: var(--main-color) auto 1px;
-}
 
 /* Task button styling */
 .task-button {
