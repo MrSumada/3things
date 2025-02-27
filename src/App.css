@@ -114,7 +114,7 @@ textarea {
 .task-container {
   margin: auto;
   margin-top: 10px;
-  /* height: 21dvh; */
+  height: 21dvh;
   margin-bottom: 5px;
 }
 
