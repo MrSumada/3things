@@ -25,9 +25,7 @@ function App() {
 
   const checkDate = () => {
     let date = new Date().toDateString();
-    console.log("Current date: ", date);
     let savedDate = localStorage.getItem('date');
-    console.log("Saved date: ", savedDate);
 
     if (savedDate) {
         if (savedDate == date) {

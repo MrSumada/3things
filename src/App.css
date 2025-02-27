@@ -14,7 +14,7 @@
   --fill-color: rgba(255, 255, 255, 0.87);
   --shadow-color: rgba(0, 128, 128, .2);
   --text-color: black;
-  --text-select-color: rgba(255, 255, 255, 0.87);
+  --text-select-color: rgb(255, 255, 255);
 }
 
 body {
@@ -22,15 +22,19 @@ body {
   display: flex;
   /* place-items: center; */
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 h1 {
   font-size: 3.0em;
   color: var(--main-color);
   margin: 0;
-  padding-top: 5vh;
-  height: 10vh;
+  padding-top: 5dvh;
+  height: 10dvh;
+}
+
+h2 {
+  color: var(--main-color);
 }
 
 
@@ -53,11 +57,24 @@ button:hover {
 }
 
 
+/* All textareas */
+
+textarea {
+  text-align: center;
+  z-index: 1;
+  border-radius: 15px;
+  height: 65px;
+  width: 200px;
+  padding: 5px 2.5px 5px 2.5px;
+  box-shadow: 5px 2px 0px 2px var(--shadow-color);
+}
+
+
 /* Reset Button */
 
 .reset-button {
   position: absolute;
-  top: 5vh;
+  top: 5dvh;
   right: 5vw;
   opacity: .2;
   background-color: var(--fill-color);
@@ -71,7 +88,7 @@ button:hover {
     display: flex;
     justify-content: center;
     margin: auto;
-    margin-top: 2vh;
+    margin-top: 3dvh;
   }
 }
 
@@ -97,7 +114,7 @@ button:hover {
 .task-container {
   margin: auto;
   margin-top: 10px;
-  height: 21vh;
+  /* height: 21dvh; */
   margin-bottom: 5px;
 }
 
@@ -108,16 +125,6 @@ button:hover {
   align-items: center;
   gap: 10px;
   width: 25vw;
-}
-
-.task-textarea {
-  text-align: center;
-  z-index: 1;
-  border-radius: 15px;
-  height: 65px;
-  width: 200px;
-  padding: 5px 2.5px 5px 2.5px;
-  box-shadow: 5px 2px 0px 2px var(--shadow-color);
 }
 
 .task-textarea:focus-visible {
@@ -131,6 +138,7 @@ button:hover {
   border: solid 1px teal;
   cursor: default;
   transition: all 1.5s ease;
+  transition-property: background, color, border, box-shadow;
   overflow: scroll;
 }
 
@@ -139,7 +147,6 @@ button:hover {
   box-shadow: -5px 2px 0px 2px var(--shadow-color);
   background-size: 220% 100%;
   color: var(--text-select-color);
-  /* cursor: default; */
 }
 
 .incomplete {
@@ -193,4 +200,27 @@ button:hover {
 @keyframes out {
   from {opacity: 1;}
   to {opacity: 0;}
+}
+
+
+/* Notes Modal */
+
+.notes-modal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5dvh;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100dvh;
+  padding-top: 5dvh;
+  background-color: var(--text-select-color);
+}
+
+.note-textarea {
+  width: 70dvw;
+  height: 55dvh;
 }
