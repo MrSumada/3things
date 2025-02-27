@@ -1,5 +1,7 @@
 #root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Yuji Syuku", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
   /* color-scheme: light dark; */
   color: rgba(255, 255, 255, 0.87);
   font-synthesis: none;
@@ -20,16 +22,16 @@
 body {
   margin: 0;
   display: flex;
-  /* place-items: center; */
   min-width: 320px;
   min-height: 100dvh;
+  font-size: 16px;
 }
 
 h1 {
-  font-size: 3.0em;
+  font-size: 4.0em;
   color: var(--main-color);
   margin: 0;
-  padding-top: 5dvh;
+  padding: 2.5dvh 0;
   height: 10dvh;
 }
 
@@ -132,7 +134,8 @@ textarea:focus-visible {
 }
 
 
-/* Task button styling */
+/* Task Main Buttons */
+
 .task-button {
   height: 75px;
   width: 200px;
@@ -159,7 +162,8 @@ textarea:focus-visible {
 }
 
 
-/* Task action buttons styling */
+/* Task Actions Buttons */
+
 .task-actions {
   display: flex;
   flex-direction: row;
