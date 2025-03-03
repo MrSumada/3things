@@ -60,7 +60,7 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
             setTasksRemaining(parseInt(Num)+1);
             localStorage.setItem("tasks-remaining", parseInt(TasksRemaining) + 1);
         }
-        saveTasks("complete", !Done);
+        saveTasks("complete", TasksRemaining);
     }
 
     const writeTask = (e) => {
