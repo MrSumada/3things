@@ -53,14 +53,12 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
         if(!Done) {
             setDone(true);
             setTasksRemaining(parseInt(Num)-1);
-            localStorage.setItem("tasks-remaining", parseInt(TasksRemaining)-1);
         }
-        else {
+        if(Done) {
             setDone(false);
             setTasksRemaining(parseInt(Num)+1);
-            localStorage.setItem("tasks-remaining", parseInt(TasksRemaining) + 1);
         }
-        saveTasks("complete", TasksRemaining);
+        saveTasks("complete", !Done);
     }
 
     const writeTask = (e) => {

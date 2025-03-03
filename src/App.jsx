@@ -6,7 +6,7 @@ import Reset from "./components/Reset";
 import Favicon from "./components/Favicon";
 
 function App() {
-  const [TasksRemaining, setTasksRemaining] = useState(localStorage.getItem("tasks-remaining") || 3);
+  const [TasksRemaining, setTasksRemaining] = useState(3);
   const [NewDate, setNewDate] = useState(false);
   const [Tasks, setTasks] = useState(JSON.parse(localStorage.getItem("allTasks"))
     || 
@@ -45,6 +45,15 @@ function App() {
     checkDate();
     const interval = setInterval(checkDate, 60000);
     return () => clearInterval(interval); // 
+  }, []);
+
+  // Set TasksRemaining based on Tasks Array
+  useEffect(() => {
+    let tasksCount = 3;
+    Tasks.forEach(task => {
+      if(task.complete) tasksCount--;
+    }); 
+    setTasksRemaining(tasksCount);
   }, []);
 
 
