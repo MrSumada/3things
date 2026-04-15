@@ -1,0 +1,1 @@
+{"name":"3Things","short_name":"3Things","description":"My app","start_url":"/3things/","display":"standalone","background_color":"#ffffff","theme_color":"#ffffff","lang":"en","scope":"/3things/","icons":[{"src":"/3things/pwa-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/3things/pwa-512x512.png","sizes":"512x512","type":"image/png"}]}
