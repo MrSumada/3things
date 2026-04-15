@@ -84,29 +84,29 @@ textarea:focus-visible {
 
 label {
   font-family: "Yuji Syuku";
-  font-size: 1.35em;
+  font-size: 1.25em;
   color: var(--main-color);
-  letter-spacing: -2px;
+  letter-spacing: -2.5px;
 }
 
-.reset-button {
+.reset-button, .reset-check {
   position: absolute;
   top: 5dvh;
   right: 5vw;
+}
+
+.reset-button {
   opacity: .2;
   background-color: var(--fill-color);
 }
 
-@media screen and (max-width: 600px) {
-  .reset-button {
-    right: 0;
-    top: 0;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    margin-top: 3dvh;
-  }
+.reset-check-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reset-check-button {
+  margin: 10px 5px;
 }
 
 .new-date {
@@ -118,8 +118,25 @@ label {
   background-color: var(--fill-color);
 }
 
-.reset-button-check {
-  margin: 20px 5px;
+
+
+@media screen and (max-width: 1000px) {
+  .reset-check, .reset-button {
+    right: 0;
+    top: 0;
+    position: relative;
+  }
+
+  .reset-check-button-container {
+    justify-content: center;
+  }
+
+  .reset-button {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 3dvh;
+  }
 }
 
 

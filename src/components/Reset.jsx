@@ -37,15 +37,15 @@ const Reset = ({ NewDate, setNewDate, setTasks, setTasksRemaining }) => {
 
                 <div className={`reset-check`}>
                     <label>Are you sure you want to reset?</label>
-                    <div>
+                    <div className={`reset-check-button-container`}>
                         <button
-                            className={`reset-button-check`}
+                            className={`reset-check-button`}
                             onClick={handleReset}
                         >
                             Yes
                         </button>
                         <button
-                            className={`reset-button-check`}
+                            className={`reset-check-button`}
                             onClick={()=>setSecondCheck(false)}
                         >
                             No
