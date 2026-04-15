@@ -18,11 +18,6 @@ function App() {
     ]
   );
 
-  const updateFavicon = () => {
-      const link = document.querySelector("link[rel*='icon']")
-      if(TasksRemaining === 2) console.log("no bug")
-  }
-
   const checkDate = () => {
     let date = new Date().toDateString();
     let savedDate = localStorage.getItem('date');
@@ -47,15 +42,6 @@ function App() {
     return () => clearInterval(interval); // 
   }, []);
 
-  // Set TasksRemaining based on Tasks Array
-  useEffect(() => {
-    let tasksCount = 3;
-    Tasks.forEach(task => {
-      if(task.complete) tasksCount--;
-    }); 
-    setTasksRemaining(tasksCount);
-  }, []);
-
 
   return (
     <>
@@ -65,32 +51,30 @@ function App() {
       <Header 
         TasksRemaining={TasksRemaining} 
       />      
-        <div className="tasks">
-          {Tasks.length > 0 &&
-          [0, 1, 2].map((i) => (
-            <Task 
-              key={i} 
-              index={i}
-              TasksRemaining={TasksRemaining}
-              setTasksRemaining={setTasksRemaining}
-              text={Tasks[i]?.text}
-              complete={Tasks[i]?.complete}
-              notes={Tasks[i]?.notes}
-              Tasks={Tasks}
-              setTasks = {setTasks}
-            />
-          ))}
-        </div> 
+      <div className="tasks">
+        {Tasks.length > 0 &&
+        [0, 1, 2].map((i) => (
+          <Task 
+            key={i} 
+            index={i}
+            TasksRemaining={TasksRemaining}
+            setTasksRemaining={setTasksRemaining}
+            text={Tasks[i]?.text}
+            complete={Tasks[i]?.complete}
+            notes={Tasks[i]?.notes}
+            Tasks={Tasks}
+            setTasks = {setTasks}
+          />
+        ))}
+      </div> 
 
-        <Reset 
+      <Reset 
         NewDate={NewDate}
         setNewDate={setNewDate}
         setTasks={setTasks}
         setTasksRemaining={setTasksRemaining}
       />
-      
     </>
-    
   );
 }
 

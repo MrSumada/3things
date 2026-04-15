@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Note from "./Note";
 
 const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, Tasks, setTasks}) => {
@@ -18,7 +18,7 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
     }
 
     const handleEditOpen = (e) => {
-        //Open textarea to edit tasks
+
         if(!EditOpened){
             if(Task == `Set Task #${index+1}`) setTask("");
             setEditOpened(true);
@@ -75,59 +75,90 @@ const Task = ({index, TasksRemaining, setTasksRemaining, text, complete, notes, 
     },[complete]);
 
     return (
-      <div className="task-container">
-        {NotesOpened ? 
-            <Note 
-                index={index}
-                notes={notes}
-                Task={Task}
-                NotesOpened={NotesOpened}
-                setNotesOpened={setNotesOpened}
-                saveTasks={saveTasks}
-            /> 
-        : "" }
-        {!EditOpened ?
-            <div className="task">
-                <button id={`task-${index}`} 
-                    onClick={ !Done ? handleEditOpen : undefined} 
-                    className={`task-button ${ Done ? "complete" : "incomplete"}`
-                }>{Task}</button>
-                <div className="task-actions">
-                    {!Done ? (<button  
-                        className="btn-edit" 
-                        onClick={handleEditOpen}
-                    >Edit</button>) : ""}
-                    {!Done ? (<button  
-                        className="btn-notes" 
-                        onClick={handleNotesOpen}
-                    >Notes</button>) : ""}
-                    <button  
-                        className="btn-done" 
-                        onClick={handleDone}
-                    >{!Done ? "Done" : "Undo"}</button>
+        <div className="task-container">
+            {NotesOpened ? 
+                <Note 
+                    index={index}
+                    notes={notes}
+                    Task={Task}
+                    NotesOpened={NotesOpened}
+                    setNotesOpened={setNotesOpened}
+                    saveTasks={saveTasks}
+                /> 
+            : "" }
+            {!EditOpened ?
+                <div className="task">
+                    <button 
+                        id={`task-${index}`} 
+                        onClick={ !Done ? handleEditOpen : undefined} 
+                        className={`task-button ${ Done ? "complete" : "incomplete"}`
+                    }>
+                        {Task}
+                    </button>
+                    <div className="task-actions">
+                        {!Done 
+                            ? (
+                                <button  
+                                    className="btn-edit" 
+                                    onClick={handleEditOpen}
+                                >
+                                    Edit
+                                </button>
+                            ) 
+                            : ""}
+                        {!Done 
+                            ? (
+                                <button  
+                                    className="btn-notes" 
+                                    onClick={handleNotesOpen}
+                                >
+                                    Notes
+                                </button>
+                            ) 
+                            : ""}
+                        <button  
+                            className="btn-done" 
+                            onClick={handleDone}
+                        >
+                            {!Done ? "Done" : "Undo"}
+                        </button>
+                    </div>
                 </div>
-            </div>
-            :
-            <div className="task task-update">
-                <textarea id={`textfield-${index}`} 
-                    className="task-textarea" 
-                    ref={textAreaRef}
-                    onChange={writeTask} 
-                    value={Task}
-                ></textarea> 
-                <div className="task-actions">
-                    {!Done ? (<button 
-                        className="btn-set" 
-                        onClick={handleEditOpen}
-                    >Set</button>) : ""}
-                    {!Done ? (<button 
-                        className="btn-notes" 
-                        onClick={handleNotesOpen}
-                    >Notes</button>) : ""}
+                :
+                <div className="task task-update">
+                    <textarea 
+                        id={`textfield-${index}`} 
+                        className="task-textarea" 
+                        ref={textAreaRef}
+                        onChange={writeTask} 
+                        onBlur={handleEditOpen}
+                        value={Task}
+                    ></textarea> 
+                    <div className="task-actions">
+                        {!Done 
+                            ? (
+                                <button 
+                                    className="btn-set" 
+                                    onClick={handleEditOpen}
+                                >
+                                    Set
+                                </button>
+                            ) 
+                            : ""}
+                        {!Done 
+                            ? (
+                                <button 
+                                    className="btn-notes" 
+                                    onClick={handleNotesOpen}
+                                >
+                                    Notes
+                                </button>
+                            ) 
+                            : ""}
+                    </div>
                 </div>
-            </div>
-        }
-      </div>
+            }
+        </div>
     )
 }
 
